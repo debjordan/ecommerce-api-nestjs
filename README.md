@@ -1,98 +1,188 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# 🛒 API E-commerce NestJS
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+API REST de e-commerce desenvolvida com NestJS, TypeScript, PostgreSQL e autenticação JWT
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Funcionalidades
 
-## Description
+- ✅ **Autenticação de Usuários** - Registro e login com JWT
+- ✅ **Gestão de Usuários** - Gerenciamento de perfil
+- 🔄 **Catálogo de Produtos** - Em breve
+- 🔄 **Carrinho de Compras** - Em breve
+- 🔄 **Gestão de Pedidos** - Em breve
+- 🔄 **Processamento de Pagamentos** - Em breve
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## 🛠️ Stack Tecnológica
 
-## Project setup
+- **Framework:** NestJS
+- **Linguagem:** TypeScript
+- **Banco de Dados:** PostgreSQL
+- **ORM:** TypeORM
+- **Autenticação:** JWT + Passport
+- **Validação:** class-validator
+- **Documentação:** Swagger/OpenAPI
 
+## 📋 Pré-requisitos
+
+- Node.js (v16 ou superior)
+- PostgreSQL
+- npm ou yarn
+
+## ⚡ Início Rápido
+
+### 1. Clonar o repositório
 ```bash
-$ npm install
+git clone https://github.com/seu-usuario/nestjs-ecommerce-api.git
+cd nestjs-ecommerce-api
 ```
 
-## Compile and run the project
-
+### 2. Instalar dependências
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+npm install
 ```
 
-## Run tests
-
+### 3. Configuração do Banco de Dados
 ```bash
-# unit tests
-$ npm run test
+# Instalar PostgreSQL (Debian/Ubuntu)
+sudo apt install postgresql postgresql-contrib
 
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+# Criar banco de dados e usuário
+sudo -u postgres psql
+CREATE USER ecommerce_user WITH ENCRYPTED PASSWORD 'sua_senha' CREATEDB;
+CREATE DATABASE ecommerce_project OWNER ecommerce_user;
+GRANT ALL PRIVILEGES ON DATABASE ecommerce_project TO ecommerce_user;
+GRANT ALL ON SCHEMA public TO ecommerce_user;
+GRANT CREATE ON SCHEMA public TO ecommerce_user;
+\q
 ```
 
-## Deployment
+### 4. Configuração das Variáveis de Ambiente
+Criar arquivo `.env` na raiz do projeto:
+```env
+# Banco de Dados
+DB_HOST=localhost
+DB_PORT=5432
+DB_USERNAME=ecommerce_user
+DB_PASSWORD=sua_senha
+DB_DATABASE=ecommerce_project
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+# JWT
+JWT_SECRET=sua-chave-secreta-jwt-super-segura
+JWT_EXPIRES_IN=7d
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
-
-```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
+# Aplicação
+PORT=3000
+NODE_ENV=development
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+### 5. Executar a aplicação
+```bash
+# Modo desenvolvimento
+npm run start:dev
 
-## Resources
+# Modo produção
+npm run build
+npm run start:prod
+```
 
-Check out a few resources that may come in handy when working with NestJS:
+## 📖 Documentação da API
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+Quando a aplicação estiver rodando, acesse:
+- **Swagger UI:** http://localhost:3000/api/docs
+- **URL Base da API:** http://localhost:3000/api/v1
 
-## Support
+## 🔗 Endpoints Disponíveis
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+### Autenticação
+- `POST /api/v1/auth/register` - Registrar novo usuário
+- `POST /api/v1/auth/login` - Login do usuário
 
-## Stay in touch
+### Usuários
+- `GET /api/v1/users/me` - Obter perfil do usuário atual (Protegido)
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+## 🧪 Testando a API
 
-## License
+### Registrar novo usuário
+```bash
+curl -X POST http://localhost:3000/api/v1/auth/register \
+  -H "Content-Type: application/json" \
+  -d '{
+    "email": "usuario@exemplo.com",
+    "name": "João Silva",
+    "password": "123456"
+  }'
+```
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+### Fazer login
+```bash
+curl -X POST http://localhost:3000/api/v1/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{
+    "email": "usuario@exemplo.com",
+    "password": "123456"
+  }'
+```
+
+### Obter perfil do usuário (usar token do login)
+```bash
+curl -X GET http://localhost:3000/api/v1/users/me \
+  -H "Authorization: Bearer SEU_TOKEN_JWT"
+```
+
+## Estrutura do Projeto
+
+```
+src/
+├── main.ts                 # Ponto de entrada da aplicação
+├── app.module.ts           # Módulo raiz
+├── config/                 # Arquivos de configuração
+│   └── database.config.ts
+├── auth/                   # Módulo de autenticação
+│   ├── auth.module.ts
+│   ├── auth.service.ts
+│   ├── auth.controller.ts
+│   ├── dto/
+│   ├── strategies/
+│   └── guards/
+└── users/                  # Módulo de usuários
+    ├── users.module.ts
+    ├── users.service.ts
+    ├── users.controller.ts
+    ├── entities/
+    └── dto/
+```
+
+## Scripts Disponíveis
+
+```bash
+# Desenvolvimento
+npm run start:dev          # Iniciar em modo watch
+npm run start:debug        # Iniciar em modo debug
+
+# Produção
+npm run build              # Compilar a aplicação
+npm run start:prod         # Iniciar servidor de produção
+
+# Testes
+npm run test               # Testes unitários
+npm run test:e2e           # Testes end-to-end
+npm run test:cov           # Cobertura de testes
+```
+
+## Contribuindo
+
+1. Faça um fork do repositório
+2. Crie sua branch de feature (`git checkout -b feature/funcionalidade-incrivel`)
+3. Commit suas mudanças (`git commit -m 'Adiciona funcionalidade incrível'`)
+4. Push para a branch (`git push origin feature/funcionalidade-incrivel`)
+5. Abra um Pull Request
+
+## Roadmap
+
+- [ ] CRUD de Produtos
+- [ ] Funcionalidade de Carrinho de Compras
+- [ ] Gestão de pedidos
+- [ ] Integração com pagamentos
+- [ ] Endereços de usuário
+- [ ] Painel administrativo
+- [ ] Notificações por email
+- [ ] Testes unitários/integração
