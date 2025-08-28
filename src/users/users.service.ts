@@ -17,7 +17,6 @@ export class UsersService {
   ) {}
 
   async create(createUserDto: CreateUserDto): Promise<User> {
-    // Verificar se email já existe
     const existingUser = await this.usersRepository.findOne({
       where: { email: createUserDto.email },
     });
@@ -26,14 +25,12 @@ export class UsersService {
       throw new ConflictException('Email já está em uso');
     }
 
-    // Criptografar senha
     const saltRounds = 10;
     const hashedPassword = await bcrypt.hash(
       createUserDto.password,
       saltRounds,
     );
 
-    // Criar usuário
     const user = this.usersRepository.create({
       ...createUserDto,
       password: hashedPassword,
@@ -48,14 +45,12 @@ export class UsersService {
     });
   }
 
-  // Método para uso interno que pode retornar null
   async findByIdOrNull(id: string): Promise<User | null> {
     return await this.usersRepository.findOne({
       where: { id },
     });
   }
 
-  // Método que sempre retorna um usuário ou lança erro
   async findById(id: string): Promise<User> {
     const user = await this.usersRepository.findOne({
       where: { id },
